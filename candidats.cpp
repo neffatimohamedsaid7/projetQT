@@ -66,14 +66,16 @@ CANDIDATS::CANDIDATS(int ID_candidat,QString nom,QString prenom,QDate datenaissa
       return model;
   }
 
-  bool CANDIDATS::supprimer(QString ID_candidat)
-  {
-      QSqlQuery query;
-           QString res=ID_candidat;
-           query.prepare("Delete from CANDIDATS where ID_candidat=:ID_candidat");
-           query.bindValue(":ID_candidat",res);
-           return query.exec();
-  }
+  bool CANDIDATS::supprimer(int ID_candidat)
+   {
+        QSqlQuery query;
+         QString ID_candidatString=QString::number(ID_candidat);
+         query.prepare("delete from CANDIDATS where ID_candidat=:ID_candidat");
+                       //bindValue ID_candidat =>ID_candidatstring
+         query.bindValue(":ID_candidat",ID_candidatString);
+                  return query.exec();
+   }
+
 
   bool CANDIDATS::modifier(QString ID_candidat)
   {
@@ -95,6 +97,39 @@ CANDIDATS::CANDIDATS(int ID_candidat,QString nom,QString prenom,QDate datenaissa
           return    query.exec();
   }
 
-
+  QSqlQueryModel* CANDIDATS::selectCANDIDATSById(int ID_candidat)
+   {
+       QSqlQueryModel* model = new QSqlQueryModel();
+       QSqlQuery query;
+       query.prepare("SELECT * FROM CANDIDATS WHERE ID_candidat = :ID_candidat");
+       query.bindValue(":ID_candidat", ID_candidat);
+       if(query.exec())
+       {
+           model->setQuery(query);
+           if(model->rowCount() == 1) // Check if exactly one row is returned
+           {
+               model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID_candidat"));
+               model->setHeaderData(1, Qt::Horizontal, QObject::tr("nom"));
+               model->setHeaderData(2, Qt::Horizontal, QObject::tr("prenom"));
+               model->setHeaderData(3, Qt::Horizontal, QObject::tr("datenaissance"));
+               model->setHeaderData(4, Qt::Horizontal, QObject::tr("niveau"));
+               model->setHeaderData(5, Qt::Horizontal, QObject::tr("email"));
+               model->setHeaderData(6, Qt::Horizontal, QObject::tr("numtel"));
+               return model;
+           }
+           else
+           {
+               qDebug() << "Error: No row or more than one row returned for ID_candidat:" << ID_candidat;
+               delete model;
+               return nullptr;
+           }
+       }
+       else
+       {
+           qDebug() << "Query execution failed.";
+           delete model;
+           return nullptr;
+       }
+   }
 
 

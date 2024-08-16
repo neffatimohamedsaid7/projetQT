@@ -18,6 +18,8 @@ public:
 private slots:
     void on_pushButton_Ajouter_clicked();
 
+    void on_pushButton_Supprimer_clicked();
+
 private:
     Ui::MainWindow *ui;
     CANDIDATS C;

@@ -42,14 +42,14 @@ class CANDIDATS
 
         bool ajouter();
         QSqlQueryModel * afficher();
-        bool supprimer(QString);
+        bool supprimer(int);
         bool modifier(QString);
         bool checkIfIdExists(QString);
 
 
         QSqlQueryModel *rechercher(QString);
         QSqlQueryModel *trier(QString);
-
+        QSqlQueryModel* selectCANDIDATSById(int ID_candidat);
 private:
     int ID_candidat;
     QString nom;
@@ -60,5 +60,6 @@ private:
     QString numtel;
 
 };
+
 
 #endif // CANDIDATS_H

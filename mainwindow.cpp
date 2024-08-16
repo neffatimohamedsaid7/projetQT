@@ -50,3 +50,35 @@ MainWindow::~MainWindow()
     }
 
 
+
+void MainWindow::on_pushButton_Supprimer_clicked()
+{
+    QModelIndexList selectedRows = ui->tableView_CANDIDATS->selectionModel()->selectedRows();
+        if (selectedRows.isEmpty()) {
+            QMessageBox::warning(this, tr("Aucune ligne sélectionnée"),
+                                 tr("Veuillez sélectionner une ligne à supprimer."),
+                                 QMessageBox::Ok);
+            return;
+        }
+
+
+        int ID_candidat = selectedRows.at(0).data().toInt();
+       CANDIDATS C;
+
+       bool test=C.supprimer(ID_candidat);
+       if(test)
+      {
+          ui->tableView_CANDIDATS->setModel(C.selectCANDIDATSById(ID_candidat));//refresh
+         QMessageBox::information(nullptr, QObject::tr("ok"),
+         QObject::tr("suppression effectué.\n"
+                     "Click Cancel to exit."), QMessageBox::Cancel);
+    ui->tableView_CANDIDATS->setModel(C.selectCANDIDATSById(ID_candidat));//refresh
+      }
+       else
+         QMessageBox::critical(nullptr, QObject::tr("not ok"),
+         QObject::tr("suppression non effectué.\n"
+                     "Click Cancel to exit."), QMessageBox::Cancel);
+
+    }
+
+
