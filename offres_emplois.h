@@ -19,7 +19,7 @@ class OFFRES_EMPLOIS
 {
     public:
         OFFRES_EMPLOIS();
-        OFFRES_EMPLOIS(int,QString,QString,QString,int,QString,int);
+        OFFRES_EMPLOIS(int,QString,QString,QDate,int,QString,int);
 
 //getters
         int getID_OffreEmploi();
@@ -28,7 +28,7 @@ class OFFRES_EMPLOIS
         QDate getdatepublication();
         int getnbrplace();
         QString getlieu();
-        int getID_condidat();
+        int getID_candidat();
 
 
         void setID_OffreEmploi(int);
@@ -42,22 +42,23 @@ class OFFRES_EMPLOIS
 
         bool ajouter();
         QSqlQueryModel * afficher();
-        bool supprimer(QString);
+        bool supprimer(int);
         bool modifier(QString);
         bool checkIfIdExists(QString);
 
 
         QSqlQueryModel *rechercher(QString);
         QSqlQueryModel *trier(QString);
+        QSqlQueryModel* selectOFFRES_EMPLOISById(int ID_OFFRE_EMPLOI);
 
 private:
-    QString ID_OffreEmploi;
+    int ID_OffreEmploi;
     QString titre;
     QString description;
     QDate datepublication;
-    QString place;
+    int nbrplace;
     QString lieu;
-    QString ID_candidat;
+    int ID_candidat;
 
 };
 
