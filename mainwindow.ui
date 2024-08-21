@@ -240,6 +240,19 @@
          <string>Supprimer</string>
         </property>
        </widget>
+       <widget class="QPushButton" name="pushButton_Modifier">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>330</y>
+          <width>93</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Modifier</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </widget>
@@ -439,6 +452,19 @@
         <width>131</width>
         <height>22</height>
        </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_Modifier2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>340</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Modifier</string>
       </property>
      </widget>
     </widget>

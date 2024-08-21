@@ -1,5 +1,7 @@
 #include "offres_emplois.h"
-
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
 OFFRES_EMPLOIS::OFFRES_EMPLOIS()
 {
 
@@ -77,25 +79,27 @@ OFFRES_EMPLOIS::OFFRES_EMPLOIS(int ID_OffreEmploi,QString titre,QString descript
    }
 
 
-  bool OFFRES_EMPLOIS::modifier(QString ID_OffreEmploi)
-  {
-  QSqlQuery query;
-          QString res= ID_OffreEmploi;
+  bool OFFRES_EMPLOIS::modifier(int ID_OffreEmploi) {
+      QSqlQuery query;
+      query.prepare("UPDATE OFFRES_EMPLOIS SET titre = :titre, description = :description, datepublication = TO_DATE(:datepublication, 'YYYY-MM-DD'), nbrplace = :nbrplace, lieu = :lieu, ID_candidat = :ID_candidat WHERE ID_OffreEmploi = :ID_OffreEmploi");
 
+      query.bindValue(":ID_OffreEmploi", ID_OffreEmploi);
+      query.bindValue(":titre", titre);
+      query.bindValue(":description", description);
+      query.bindValue(":datepublication", datepublication.toString("yyyy-MM-dd")); // Assurez-vous que ce format correspond à celui utilisé dans TO_DATE
+      query.bindValue(":nbrplace", nbrplace);
+      query.bindValue(":lieu", lieu);
+      query.bindValue(":ID_candidat", ID_candidat);
 
-          query.prepare("UPDATE OFFRES_EMPLOIS SET titre=:titre,description=:description,datepublication=:datepublication,nbrplace=:nbrplace,lieu=:lieu,ID_candidat=:ID_candidat where ID_OffreEmploi=:ID_OffreEmploi");
-          query.bindValue(":ID_OffreEpmloi",ID_OffreEmploi);
-              query.bindValue(":titre",titre);
-               query.bindValue(":description",description);
-               query.bindValue(":datepublication",datepublication);
-               query.bindValue(":nbrplace",nbrplace);
-               query.bindValue(":lieu",lieu);
-               query.bindValue(":ID_candidat",ID_candidat);
+      if (!query.exec()) {
+          qDebug() << "Error executing query:" << query.lastError().text();
+          return false;
+      }
 
-
-
-          return    query.exec();
+      return true;
   }
+
+
 
   QSqlQueryModel* OFFRES_EMPLOIS::selectOFFRES_EMPLOISById(int ID_OffreEmploi)
    {
@@ -129,5 +133,19 @@ OFFRES_EMPLOIS::OFFRES_EMPLOIS(int ID_OffreEmploi,QString titre,QString descript
            qDebug() << "Query execution failed.";
            delete model;
            return nullptr;
+       }
+   }
+
+  bool OFFRES_EMPLOIS::idDisponible(int ID_OffreEmploi) {
+       QSqlQuery query;
+       query.prepare("SELECT ID_OffreEmploi FROM OFFRES_EMPLOIS WHERE ID_OffreEmploi = :ID_OffreEmploi");
+       query.bindValue(":ID_OffreEmploi", ID_OffreEmploi);
+
+       if (query.exec() && query.next()) {
+
+           return true;
+       } else {
+
+           return false;
        }
    }

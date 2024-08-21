@@ -22,6 +22,12 @@ private slots:
     void on_pushButton_Supprimer_clicked();
     void on_pushButton_Ajouter2_clicked();
     void on_pushButton_Supprimer2_clicked();
+    void on_tableViewCANDIDATS_clicked(const QModelIndex &index);
+    void on_tableView_OffresEmplois_clicked(const QModelIndex &index);
+    void on_pushButton_Modifier_clicked();
+
+    void on_pushButton_Modifier2_clicked();
+
 private:
     Ui::MainWindow *ui;
     CANDIDATS C;
