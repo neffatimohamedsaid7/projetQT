@@ -80,7 +80,7 @@ CANDIDATS::CANDIDATS(int ID_candidat,QString nom,QString prenom,QDate datenaissa
   bool CANDIDATS::modifier(int ID_candidat)
   {
   QSqlQuery query;
-          int res= ID_candidat;
+
 
 
           query.prepare("UPDATE CANDIDATS SET nom=:nom,prenom=:prenom,datenaissance=:datenaissance,niveau=:niveau,email=:email,numtel=:numtel where ID_candidat=:ID_candidat");

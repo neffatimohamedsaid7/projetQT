@@ -151,16 +151,6 @@
          </rect>
         </property>
        </widget>
-       <widget class="QLineEdit" name="lineEdit_niveau">
-        <property name="geometry">
-         <rect>
-          <x>240</x>
-          <y>170</y>
-          <width>131</width>
-          <height>22</height>
-         </rect>
-        </property>
-       </widget>
        <widget class="QLineEdit" name="lineEdit_email">
         <property name="geometry">
          <rect>
@@ -231,7 +221,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>380</y>
+          <y>400</y>
           <width>93</width>
           <height>28</height>
          </rect>
@@ -244,13 +234,56 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>330</y>
+          <y>370</y>
           <width>93</width>
           <height>28</height>
          </rect>
         </property>
         <property name="text">
          <string>Modifier</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="comboBox_niveaucandidat">
+        <property name="geometry">
+         <rect>
+          <x>242</x>
+          <y>170</y>
+          <width>121</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <item>
+         <property name="text">
+          <string/>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>debutant</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>intermediaire</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>avance</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QPushButton" name="Statistique">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>340</y>
+          <width>93</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Statitique</string>
         </property>
        </widget>
       </widget>
@@ -284,7 +317,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>390</y>
+        <y>500</y>
         <width>93</width>
         <height>28</height>
        </rect>
@@ -310,7 +343,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>450</y>
+        <y>530</y>
         <width>93</width>
         <height>28</height>
        </rect>
@@ -424,16 +457,6 @@
        <string>nbrplace</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_lieu">
-      <property name="geometry">
-       <rect>
-        <x>140</x>
-        <y>200</y>
-        <width>131</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="lineEdit_description">
       <property name="geometry">
        <rect>
@@ -458,13 +481,56 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>340</y>
+        <y>470</y>
         <width>93</width>
         <height>28</height>
        </rect>
       </property>
       <property name="text">
        <string>Modifier</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_lieuOffreEmploi">
+      <property name="geometry">
+       <rect>
+        <x>142</x>
+        <y>200</y>
+        <width>131</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Tunis</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Sfax</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Sousse</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QPushButton" name="Statistique2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>440</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Statistique</string>
       </property>
      </widget>
     </widget>

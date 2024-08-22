@@ -28,6 +28,12 @@ private slots:
 
     void on_pushButton_Modifier2_clicked();
 
+    void on_tableView_CANDIDATS_clicked(const QModelIndex &index);
+
+    void on_Statistique_clicked();
+
+    void on_Statistique2_clicked();
+
 private:
     Ui::MainWindow *ui;
     CANDIDATS C;

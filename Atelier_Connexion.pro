@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui sql
+QT       += core gui sql network multimedia multimediawidgets charts printsupport widgets axcontainer
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
