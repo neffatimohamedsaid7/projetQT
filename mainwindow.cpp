@@ -566,3 +566,79 @@ void MainWindow::on_Statistique2_clicked()
 
 
 }
+
+void MainWindow::on_pushButton_Recherche_clicked()
+{
+    CANDIDATS C;
+
+    int index = ui->comboBox_recherche->currentIndex();
+    QString wh;
+    QSqlQueryModel* model = new QSqlQueryModel();
+    QString k = ui->lineEdit_recherche->text().trimmed(); // Trimmed to remove leading and trailing whitespace
+
+    if (k.isEmpty()) {
+        QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("Empty field.\nClick Cancel to exit."), QMessageBox::Cancel);
+        return;
+    }
+
+    if (index == 0) {
+        if (!C.idDisponible(k.toInt())) {
+            wh = "ID_candidat=" + k;
+        } else {
+            QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("ID_candidat unavailable.\nClick Cancel to exit."), QMessageBox::Cancel);
+            return;
+        }
+    } else if (index == 1) {
+        wh = "prenom='" + k + "'";
+    } else if (index == 2) {
+        wh = "niveau='" + k + "'";
+    }
+
+    if (C.rech(wh)) {
+        model->setQuery("SELECT * FROM CANDIDATS WHERE " + wh);
+        ui->tableView_CANDIDATS->setModel(model);
+
+        if (model->rowCount() == 0) {
+            QMessageBox::information(nullptr, QObject::tr("No Results"), QObject::tr("No candidates found.\nClick Cancel to exit."), QMessageBox::Cancel);
+        } else {
+            QMessageBox::information(nullptr, QObject::tr("Success"), QObject::tr("Search performed.\nClick Cancel to exit."), QMessageBox::Cancel);
+        }
+    } else {
+        QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("Search failed.\nClick Cancel to exit."), QMessageBox::Cancel);
+    }
+}
+
+void MainWindow::on_pushButton_Recherche_2_clicked()
+{
+    OFFRES_EMPLOIS O;
+
+        int index = ui->comboBox_recherche_2->currentIndex();
+        QString wh;
+        QSqlQueryModel* model = new QSqlQueryModel();
+        QString k = ui->lineEdit_recherche_2->text().trimmed(); // Trimmed to remove leading and trailing whitespace
+
+        if (k.isEmpty()) {
+            QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("Empty field.\nClick Cancel to exit."), QMessageBox::Cancel);
+            return;
+        }
+
+        if (index == 0) {
+            if (!O.idDisponible(k.toInt())) {
+                QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("ID_OffreEmploi unavailable.\nClick Cancel to exit."), QMessageBox::Cancel);
+                return;
+            }
+            wh = "ID_OffreEmploi=" + k;
+        } else if (index == 1) {
+            wh = "titre='" + k + "'";
+        } else if (index == 2) {
+            wh = "lieu='" + k + "'";
+        }
+        if (O.rech(wh)) {
+            QMessageBox::information(nullptr, QObject::tr("Success"), QObject::tr("Search performed.\nClick Cancel to exit."), QMessageBox::Cancel);
+            model->setQuery("SELECT * FROM OFFRES_EMPLOIS WHERE " + wh);
+            ui->tableView_OffresEmplois->setModel(model);
+        } else {
+            QMessageBox::critical(nullptr, QObject::tr("Error"), QObject::tr("Search failed.\nClick Cancel to exit."), QMessageBox::Cancel);
+        }
+
+}

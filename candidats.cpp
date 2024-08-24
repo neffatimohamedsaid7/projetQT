@@ -131,5 +131,33 @@ CANDIDATS::CANDIDATS(int ID_candidat,QString nom,QString prenom,QDate datenaissa
            return nullptr;
        }
    }
+  bool CANDIDATS::rech(QString rch)
+  {
+      QSqlQuery query;
+      QString queryString = "SELECT * FROM CANDIDATS WHERE " + rch;
+      query.prepare(queryString);
+
+      return query.exec();
+  }
+
+  bool CANDIDATS::tri(QString tr){
+
+      QSqlQuery query;
+          query.prepare("SELECT * FROM CANDIDATS "+tr);
+          return query.exec() ;
+
+  }
+  bool CANDIDATS::idDisponible(int ID_candidat)
+  {
+      QSqlQuery query;
+      query.prepare("SELECT ID_candidat FROM CANDIDATS WHERE ID_candidat = :ID_candidat");
+      query.bindValue(":ID_candidat", ID_candidat);
+
+      if (query.exec() && query.next()) {
+          return false; // ID_candidat is not available
+      } else {
+          return true; // ID_candidat is available
+      }
+  }
 
 

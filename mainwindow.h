@@ -34,6 +34,10 @@ private slots:
 
     void on_Statistique2_clicked();
 
+    void on_pushButton_Recherche_clicked();
+
+    void on_pushButton_Recherche_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     CANDIDATS C;

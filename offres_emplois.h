@@ -44,13 +44,14 @@ class OFFRES_EMPLOIS
         QSqlQueryModel * afficher();
         bool supprimer(int);
         bool modifier(int);
-        bool checkIfIdExists(QString);
+        bool checkIfIdExists(int);
 
 
-        QSqlQueryModel *rechercher(QString);
-        QSqlQueryModel *trier(QString);
+
         QSqlQueryModel* selectOFFRES_EMPLOISById(int ID_OFFRE_EMPLOI);
         bool idDisponible(int);
+        bool rech(QString);
+        bool tri(QString);
 
 private:
     int ID_OffreEmploi;

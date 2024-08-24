@@ -149,3 +149,16 @@ OFFRES_EMPLOIS::OFFRES_EMPLOIS(int ID_OffreEmploi,QString titre,QString descript
            return false;
        }
    }
+  bool OFFRES_EMPLOIS::rech(QString rch) {
+      QSqlQuery query;
+      query.prepare("SELECT * FROM OFFRES_EMPLOIS WHERE " + rch);
+      return query.exec();
+  }
+
+  bool OFFRES_EMPLOIS::tri(QString tr){
+
+      QSqlQuery query;
+          query.prepare("SELECT * FROM OFRRES_EMPLOIS "+tr);
+          return query.exec() ;
+
+  }
