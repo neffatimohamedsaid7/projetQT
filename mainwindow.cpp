@@ -642,3 +642,59 @@ void MainWindow::on_pushButton_Recherche_2_clicked()
         }
 
 }
+
+void MainWindow::on_pushButton_refrech_clicked()
+{
+    ui->tableView_CANDIDATS->setModel(C.afficher());
+}
+
+void MainWindow::on_pushButton_refrech_2_clicked()
+{
+    ui->tableView_OffresEmplois->setModel(O.afficher());
+
+}
+
+
+void MainWindow::on_pushButton_Tri_clicked()
+{
+    int index=ui->comboBox_Tri->currentIndex();
+           QString orderByClause;
+           QSqlQueryModel* model=new QSqlQueryModel();
+           if (index == 0) {
+                       orderByClause = " ORDER BY ID_candidat DESC ";
+                   } else if (index == 1) {
+                       orderByClause = " ORDER BY prenom ";
+                   } else if (index == 2) {
+                       orderByClause = " ORDER BY niveau ";
+                   }
+
+           if (C.tri(orderByClause)) {
+               QMessageBox::information(nullptr,QObject::tr("ok"),QObject::tr("Tri effectue \n""Click cancel to exit ."),QMessageBox::Cancel);
+                model->setQuery("SELECT *  FROM CANDIDATS"+orderByClause);
+               ui->tableView_CANDIDATS->setModel(model);
+           } else {
+              QMessageBox::critical(nullptr,QObject::tr(" not ok"),QObject::tr("tri non effectue \n""Click cancel to exit ."),QMessageBox::Cancel);
+           }
+}
+
+void MainWindow::on_pushButton_Tri_2_clicked()
+{
+    int index=ui->comboBox_Tri_2->currentIndex();
+           QString orderByClause;
+           QSqlQueryModel* model=new QSqlQueryModel();
+           if (index == 0) {
+                       orderByClause = " ORDER BY ID_OffreEmploi DESC ";
+                   } else if (index == 1) {
+                       orderByClause = " ORDER BY titre ";
+                   } else if (index == 2) {
+                       orderByClause = " ORDER BY nbrplace ";
+                   }
+
+           if (O.tri(orderByClause)) {
+               QMessageBox::information(nullptr,QObject::tr("ok"),QObject::tr("Tri effectue \n""Click cancel to exit ."),QMessageBox::Cancel);
+                model->setQuery("SELECT *  FROM OFFRES_EMPLOIS"+orderByClause);
+               ui->tableView_OffresEmplois->setModel(model);
+           } else {
+              QMessageBox::critical(nullptr,QObject::tr(" not ok"),QObject::tr("tri non effectue \n""Click cancel to exit ."),QMessageBox::Cancel);
+           }
+}

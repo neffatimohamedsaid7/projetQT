@@ -38,6 +38,16 @@ private slots:
 
     void on_pushButton_Recherche_2_clicked();
 
+    void on_pushButton_refrech_clicked();
+
+    void on_pushButton_refrech_2_clicked();
+
+    void on_pushButton_Recherche_3_clicked();
+
+    void on_pushButton_Tri_clicked();
+
+    void on_pushButton_Tri_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     CANDIDATS C;
