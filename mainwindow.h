@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "candidats.h"
 #include "offres_emplois.h"
+#include "NotificationLayout.h"
 namespace Ui {
 class MainWindow;
 }
@@ -42,16 +43,25 @@ private slots:
 
     void on_pushButton_refrech_2_clicked();
 
-    void on_pushButton_Recherche_3_clicked();
-
     void on_pushButton_Tri_clicked();
 
     void on_pushButton_Tri_2_clicked();
+
+    void on_pushButton_PDF_clicked();
+
+    void on_pushButton_PDF_2_clicked();
+
+    void on_qrcodegen_clicked();
+
+    void on_pushButton_success_clicked();
+    void on_pushButtonModifier_success_clicked();
+    void on_pushButtonSupprimer_success_clicked();
 
 private:
     Ui::MainWindow *ui;
     CANDIDATS C;
     OFFRES_EMPLOIS O;
+    NotificationLayout notificationLayout;
 };
 
 #endif // MAINWINDOW_H

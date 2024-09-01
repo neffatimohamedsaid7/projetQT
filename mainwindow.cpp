@@ -31,6 +31,8 @@
 #include <QPieSlice>
 #include <QPieSeries>
 #include <QChartView>
+#include "QrCode.hpp"
+using namespace qrcodegen;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -132,6 +134,7 @@ MainWindow::~MainWindow()
          ui->label_email->clear();
          ui->label_numtel->clear();
          ui->label_ID_candidat_2->clear();
+         on_pushButton_success_clicked();
         }
 
 
@@ -165,7 +168,7 @@ void MainWindow::on_pushButton_Supprimer_clicked()
          QObject::tr("suppression effectué.\n"
                      "Click Cancel to exit."), QMessageBox::Cancel);
          ui->tableView_CANDIDATS->setModel(C.afficher());//refresh
-
+         on_pushButtonSupprimer_success_clicked();
       }
        else
          QMessageBox::critical(nullptr, QObject::tr("not ok"),
@@ -390,7 +393,9 @@ void MainWindow::on_pushButton_Modifier_clicked()
      ui->lineEdit_prenom->clear();
      ui->lineEdit_datenaissance->clear();
      ui->lineEdit_email->clear();
-    ui->lineEdit_numtel->clear();}
+    ui->lineEdit_numtel->clear();
+    on_pushButtonModifier_success_clicked();
+    }
 
 
     else
@@ -697,4 +702,170 @@ void MainWindow::on_pushButton_Tri_2_clicked()
            } else {
               QMessageBox::critical(nullptr,QObject::tr(" not ok"),QObject::tr("tri non effectue \n""Click cancel to exit ."),QMessageBox::Cancel);
            }
+}
+
+void MainWindow::on_pushButton_PDF_clicked()
+{
+    QPdfWriter pdf("C:/Users/msn26/Desktop/PROJET QT/Atelier_Connexion/Atelier_Connexion/list-CANDIDATS.pdf");
+
+            QPainter painter(&pdf);
+                   int i = 4000;
+                   painter.setPen(Qt::black);
+                   painter.setFont(QFont("Book Script", 20, QFont::Bold));
+                   painter.drawText(2500, 1400, "LISTE DES CANDIDATS");
+                   painter.setPen(Qt::black);
+                   painter.setFont(QFont("Time New Roman", 10));
+                   painter.drawRect(100, 100, 9200, 2700);
+                   painter.drawRect(100, 3000, 9200, 500);
+
+                   painter.drawText(300,3300,"ID_candidat");
+                   painter.drawText(1500,3300,"nom");
+                   painter.drawText(2500,3300,"prenom");
+                   painter.drawText(3500,3300,"datenaissance");
+                   painter.drawText(5300,3300,"niveau");
+                   painter.drawText(6500,3300,"email");
+                   painter.drawText(8300,3300,"numtel");
+                   QImage image("C:/Users/msn26/Desktop/PROJET QT/Atelier_Connexion/Atelier_Connexion/logoEsprit.jpg");
+                   painter.drawImage(QRectF(200, 200, 2000, 2000), image);
+                   QImage image1("C:/Users/msn26/Desktop/PROJET QT/Atelier_Connexion/Atelier_Connexion/click_taf_recrutement.png");
+                   painter.drawImage(QRectF(7000, 200, 2000, 2000), image1);
+                   painter.drawRect(100, 3700, 9200, 9000);
+                   QSqlQuery query;
+                   query.prepare("select * from CANDIDATS");
+                   query.exec();
+                   while (query.next())
+                   {
+                       painter.drawText(300, i, query.value(0).toString());
+                       painter.drawText(1300, i, query.value(1).toString());
+                       painter.drawText(2500, i, query.value(2).toString());
+                       painter.drawText(3500, i, query.value(3).toString());
+                       painter.drawText(5300, i, query.value(4).toString());
+                       painter.drawText(6500, i, query.value(5).toString());
+                       painter.drawText(8300, i, query.value(6).toString());
+                       i = i + 350;
+                   }
+                   QMessageBox::information(this, QObject::tr("PDF Enregistré!"),
+                       QObject::tr("PDF Enregistré!.\n" "Click Cancel to exit."), QMessageBox::Cancel);
+
+}
+
+void MainWindow::on_pushButton_PDF_2_clicked()
+{
+    QPdfWriter pdf("C:/Users/msn26/Desktop/PROJET QT/Atelier_Connexion/Atelier_Connexion/list-OFFRES_EMPLOIS.pdf");
+
+            QPainter painter(&pdf);
+                   int i = 4000;
+                   painter.setPen(Qt::black);
+                   painter.setFont(QFont("Book Script", 20, QFont::Bold));
+                   painter.drawText(2500, 1400, "LISTE OFFRES_EMPLOIS");
+                   painter.setPen(Qt::black);
+                   painter.setFont(QFont("Time New Roman", 10));
+                   painter.drawRect(100, 100, 9200, 2700);
+                   painter.drawRect(100, 3000, 9200, 500);
+
+                   painter.drawText(300,3300,"ID_OffreEmploi");
+                   painter.drawText(1500,3300,"titre");
+                   painter.drawText(2500,3300,"description");
+                   painter.drawText(3500,3300,"datepublication");
+                   painter.drawText(5300,3300,"nbrplace");
+                   painter.drawText(6500,3300,"lieu");
+                   painter.drawText(8300,3300,"number");
+                   QImage image("C:/Users/msn26/Desktop/PROJET QT/Atelier_Connexion/Atelier_Connexion/logoEsprit.jpg");
+                   painter.drawImage(QRectF(200, 200, 2000, 2000), image);
+                   QImage image1("C:/Users/msn26/Desktop/PROJET QT/Atelier_Connexion/Atelier_Connexion/click_taf_recrutement.png");
+                   painter.drawImage(QRectF(7000, 200, 2000, 2000), image1);
+                   painter.drawRect(100, 3700, 9200, 9000);
+                   QSqlQuery query;
+                   query.prepare("select * from OFFRES_EMPLOIS");
+                   query.exec();
+                   while (query.next())
+                   {
+                       painter.drawText(300, i, query.value(0).toString());
+                       painter.drawText(1300, i, query.value(1).toString());
+                       painter.drawText(2500, i, query.value(2).toString());
+                       painter.drawText(3500, i, query.value(3).toString());
+                       painter.drawText(5300, i, query.value(4).toString());
+                       painter.drawText(6500, i, query.value(5).toString());
+                       painter.drawText(8300, i, query.value(6).toString());
+                       i = i + 350;
+                   }
+                   QMessageBox::information(this, QObject::tr("PDF Enregistré!"),
+                       QObject::tr("PDF Enregistré!.\n" "Click Cancel to exit."), QMessageBox::Cancel);
+}
+
+void MainWindow::on_qrcodegen_clicked()
+{
+    QString value = ui->lineEdit_qrcode->text();
+
+        QSqlQuery qry;
+        qry.prepare("SELECT * FROM CANDIDATS WHERE ID_candidat = :ID_candidat");
+        qry.bindValue(":ID_candidat", value);
+        qry.exec();
+
+        if (qry.next()) {
+            // ID_candidat exists in the database
+            QString ID_candidat = qry.value(0).toString();
+            QString nom = qry.value(1).toString();
+            QString prenom = qry.value(2).toString();
+            QString datenaissance = qry.value(3).toString();
+            QString niveau = qry.value(4).toString();
+            QString email = qry.value(5).toString();
+            QString numtel = qry.value(6).toString();
+
+            QString text = "ID_candidat " + ID_candidat + "\n" + "nom " + nom + "\n" + "prenom " + prenom + "\n" +
+                           "datenaissance " + datenaissance + "\n" + "niveau " + niveau+ "\n" + "email " + email+ "\n" + "numtel " + numtel;
+
+            // Create the QR Code object
+            QrCode qr = QrCode::encodeText(text.toUtf8().data(), QrCode::Ecc::MEDIUM);
+
+            qint32 sz = qr.getSize();
+            QImage im(sz, sz, QImage::Format_RGB32);
+            QRgb black = qRgb(191, 112, 105);
+            QRgb white = qRgb(255, 255, 255);
+
+            for (int y = 0; y < sz; y++) {
+                for (int x = 0; x < sz; x++) {
+                    im.setPixel(x, y, qr.getModule(x, y) ? black : white);
+                }
+            }
+
+            ui->qrcodecommande->setPixmap(QPixmap::fromImage(im.scaled(200, 200, Qt::KeepAspectRatio, Qt::FastTransformation), Qt::MonoOnly));
+        } else {
+            // ID does not exist in the database
+            QMessageBox::critical(nullptr, QObject::tr("ID_candidat introuvable"),
+                QObject::tr("L'ID que vous avez saisi n'existe pas.\n"
+                            "Click Cancel to exit."), QMessageBox::Cancel);
+        }
+}
+
+#include "Result.h"
+#include "Operation.h"
+#include "NotificationWidget.h"
+#include "NotificationLayout.h"
+void MainWindow::on_pushButton_success_clicked()
+{
+
+    NotificationParams params;
+    params.title = "CANDIDATS a été ajoutée avec succées";
+    params.message = Operation::DoSomething(Result::RESULT_SUCCESS);
+    params.detailsButtonText = "Try again";
+    notificationLayout.AddNotificationWidget(this, params);
+}
+void MainWindow::on_pushButtonModifier_success_clicked()
+{
+
+    NotificationParams params;
+    params.title = "CANDIDATS a été modifiée avec succées";
+    params.message = Operation::DoSomething(Result::RESULT_SUCCESS);
+    params.detailsButtonText = "Try again";
+    notificationLayout.AddNotificationWidget(this, params);
+}
+void MainWindow::on_pushButtonSupprimer_success_clicked()
+{
+
+    NotificationParams params;
+    params.title = "CANDIDATS a été supprimée avec succées";
+    params.message = Operation::DoSomething(Result::RESULT_SUCCESS);
+    params.detailsButtonText = "Try again";
+    notificationLayout.AddNotificationWidget(this, params);
 }

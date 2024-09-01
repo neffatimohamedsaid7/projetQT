@@ -1,0 +1,6 @@
+#include "Opeartion.h"
+
+NotificationOpeartion::NotificationOpeartion()
+{
+
+}

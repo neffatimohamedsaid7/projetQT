@@ -26,13 +26,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    NotificationLayout.cpp \
+    NotificationWidget.cpp \
+    Operation.cpp \
+    Result.cpp \
     candidats.cpp \
         main.cpp \
         mainwindow.cpp \
     connection.cpp \
-    offres_emplois.cpp
+    offres_emplois.cpp \
+    qrcode.cpp
 
 HEADERS += \
+    NotificationLayout.h \
+    NotificationWidget.h \
+    Operation.h \
+    QrCode.hpp \
+    Result.h \
     candidats.h \
         mainwindow.h \
     connection.h \

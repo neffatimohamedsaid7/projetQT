@@ -17,10 +17,10 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>80</y>
-      <width>881</width>
-      <height>571</height>
+      <x>30</x>
+      <y>20</y>
+      <width>1061</width>
+      <height>681</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -30,10 +30,10 @@
      <widget class="QTabWidget" name="tabWidget">
       <property name="geometry">
        <rect>
-        <x>90</x>
-        <y>20</y>
-        <width>731</width>
-        <height>531</height>
+        <x>0</x>
+        <y>10</y>
+        <width>1001</width>
+        <height>611</height>
        </rect>
       </property>
       <property name="currentIndex">
@@ -487,6 +487,42 @@
         </property>
         <property name="text">
          <string>refrech</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="qrcodecommande">
+        <property name="geometry">
+         <rect>
+          <x>780</x>
+          <y>90</y>
+          <width>200</width>
+          <height>200</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="qrcodegen">
+        <property name="geometry">
+         <rect>
+          <x>830</x>
+          <y>300</y>
+          <width>93</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>qr code</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_qrcode">
+        <property name="geometry">
+         <rect>
+          <x>820</x>
+          <y>340</y>
+          <width>113</width>
+          <height>22</height>
+         </rect>
         </property>
        </widget>
       </widget>
